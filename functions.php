@@ -252,3 +252,5 @@ function skke_get_seo_tags() {
 
   return $r;
 }
+
+require_once(__DIR__ . '/inc/acf.php');
