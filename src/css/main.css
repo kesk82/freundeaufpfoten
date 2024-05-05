@@ -574,6 +574,14 @@ article.post-index-item {
     height: 100%;
     object-fit: cover;
   }
+
+  .the_excerpt {
+    overflow: hidden;
+    position: absolute;
+    left: -99999px;
+    width: 1px;
+    height: 1px;
+  }
 }
 
 /* main.post-index > h1,

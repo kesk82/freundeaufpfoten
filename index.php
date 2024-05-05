@@ -77,6 +77,8 @@ echo '<div class="the_content archive-list">';
           <?php endif; ?>
 
           <h2><?php the_title(); ?></h2>
+
+          <p class="the_excerpt"><?php echo get_the_excerpt(); ?></p>
         </a>
       </article>
 

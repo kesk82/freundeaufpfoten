@@ -64,6 +64,10 @@ echo '<div class="the_content archive-list">';
           <?php endif; ?>
 
           <h2><?php echo $category->name; ?></h2>
+
+          <?php if ( ! empty($category->description)) : ?>
+            <p class="the_excerpt"><?php echo $category->description; ?></p>
+          <?php endif; ?>
         </a>
       </article>
 
