@@ -24,19 +24,6 @@ if ( is_home() ) {
   $page_title = get_bloginfo( 'description' );
 }
 
-// if ( $_queried_object && function_exists( 'get_field' ) && 'WP_Term' == get_class( $_queried_object ) ) {
-//   $archive_pic_id = get_field('kategorie_bild', $_queried_object->taxonomy . '_' . $_queried_object->term_id);
-
-//   if ( is_int( $archive_pic_id ) && $archive_pic_id) {
-//     $archive_pic_html = wp_get_attachment_image($archive_pic_id, 'thumbnail', false, array(
-//       'class' => 'single-post-img fade-in-effect',
-//       'loading' => 'eager',
-//       'srcset' => sk_get_srcset($archive_pic_id),
-//       'sizes' => '(max-width: 64rem) 100vw, 64rem'
-//     ));
-//   }
-// }
-
 ?>
 <main><?php
 
@@ -90,10 +77,6 @@ echo '<div class="the_content archive-list">';
       'next_text' => 'Nächste Seite »',
       'prev_text' => '« Vorherige Seite'
     ));
-
-    ?>
-      <div class="tag_cloud"><?php echo wp_tag_cloud(); ?></div>
-    <?php
 
   else : ?>
     <p><?php esc_html_e( 'Sorry, no posts matched your criteria.' ); ?></p>

@@ -32,9 +32,6 @@ while ( have_posts() ) :
       <?php if ( is_singular( 'post' ) ) : ?>
         <footer class="postmetadata">
           <p>Kategorien: <?php the_category( ', ' ); ?></p>
-          <?php if ( has_tag() ) : ?>
-            <p><?php the_tags(); ?></p>
-          <?php endif; ?>
         </footer>
       <?php endif; ?>
 

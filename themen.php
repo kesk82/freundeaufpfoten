@@ -75,10 +75,6 @@ echo '<div class="the_content archive-list">';
 
     endforeach;
 
-    ?>
-      <div class="tag_cloud"><?php echo wp_tag_cloud(); ?></div>
-    <?php
-
   else : ?>
     <p><?php esc_html_e( 'Sorry, found no themes here!' ); ?></p>
     <?php
