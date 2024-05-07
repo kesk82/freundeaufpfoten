@@ -102,6 +102,9 @@ function mytheme_setup_theme() {
 
 add_action( 'after_setup_theme', 'mytheme_setup_theme' );
 
+/**
+ * Disable search.
+ */
 function disable_search($query, $error = true)
 {
     if (is_search() && !is_admin()) {
@@ -116,6 +119,9 @@ function disable_search($query, $error = true)
 add_action('parse_query', 'disable_search');
 add_filter('get_search_form', function(){ return null; });
 
+/**
+ * Make sure we areusing lasy loading for images.
+ */
 add_filter( 'wp_get_attachment_image_attributes', function( $attr, $attachment, $size ) {
 
   if ( ! isset($attr['loading']) ) {
@@ -125,11 +131,13 @@ add_filter( 'wp_get_attachment_image_attributes', function( $attr, $attachment, 
 	return $attr;
 }, 10, 3 );
 
+/**
+ * Do not load embeded stuff without JS code (asks for permission).
+ */
 add_filter( 'render_block', function($block_content, $parsed_block, $that) {
 
   if ( $parsed_block["blockName"] && strpos( $parsed_block["blockName"], 'embed' ) !== false ) {
-    // skke_log($block_content);
-    return str_replace(' src="', ' data-orig-src="', $block_content);
+    return str_replace(' src="', ' data-ks-embed-orig-src="', $block_content);
   }
 
   return $block_content;
@@ -141,6 +149,9 @@ add_filter( 'render_block', function($block_content, $parsed_block, $that) {
 //   return $block_content;
 // }, 999, 3);
 
+/**
+ * Do not load images without JS code:
+ */
 add_filter( 'wp_content_img_tag', function($filtered_image, $context, $attachment_id) {
   if ($context && $context === "the_content") {
     $r = str_replace(' src="', ' data-sk-src="', $filtered_image);
@@ -152,6 +163,10 @@ add_filter( 'wp_content_img_tag', function($filtered_image, $context, $attachmen
 
 add_filter( 'excerpt_length', function() { return 30; }, 999 );
 
+/**
+ * Helper Function for creating srcset attribute for img HTML tag.
+ * 
+ */
 function sk_get_srcset($at_id) {
   $r = '';
   $meta_data = wp_get_attachment_metadata($at_id);
@@ -172,11 +187,16 @@ function sk_get_srcset($at_id) {
   return $r;
 }
 
+/*
+ * Do not fetch avatars from the net.
+ * */
 add_filter( 'get_avatar_url', function($url) {
   return get_stylesheet_directory_uri() . '/img/avatar.jpg';
-  // return $url;
 }, 999, 1);
 
+/**
+ * Creates HTML head meta description tag.
+ */
 function skke_get_meta_desc() {
   global $post;
   $_queried_object = get_queried_object();
@@ -193,6 +213,9 @@ function skke_get_meta_desc() {
   return $r;
 }
 
+/**
+ * Creates SEO meta tags for the HTML head.
+ */
 function skke_get_seo_tags() {
   global $post;
   $_queried_object = get_queried_object();
@@ -253,4 +276,7 @@ function skke_get_seo_tags() {
   return $r;
 }
 
+/**
+ * ACF settings exported as PHP code.
+ */
 require_once(__DIR__ . '/inc/acf.php');

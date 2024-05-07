@@ -1,4 +1,4 @@
-import { justTesting, addScrollEffect, fadeInImages } from './functions.mjs';
+import { justTesting, addScrollEffect, fadeInImages, runEmbeds } from './functions.mjs';
 
 // Open & Close Mobile Navigation:
 const mainNavigationBtn = document.getElementById('main-navigation-btn');
@@ -48,3 +48,4 @@ if (unloadedImages) {
 
 addScrollEffect();
 fadeInImages();
+runEmbeds();
