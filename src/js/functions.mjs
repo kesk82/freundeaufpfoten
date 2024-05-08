@@ -1,5 +1,9 @@
 const mainHeader = document.getElementById('main-header');
 
+/**
+ * Change header when scrolling down:
+ * 
+ */
 function onPageScroll() {
   if (window.scrollY > 0) {
     if (! document.body.classList.contains('fixed-header')) {
@@ -18,6 +22,10 @@ export function addScrollEffect() {
   onPageScroll();
 }
 
+/**
+ * Add class img-loaded to transparent images that where loaded so we can fade them in:
+ * 
+ */
 export function fadeInImages() {
   const images = document.querySelectorAll('img.fade-in-effect');
 
@@ -32,35 +40,19 @@ export function fadeInImages() {
   });
 }
 
+/**
+ * HTML code for widget that asks for permision to load embeded content:
+ */
 function addEmbedLoadControl(elmt) {
   if (elmt) {
     let fragment = document.createDocumentFragment();
     let frame = document.createElement('DIV');
     frame.classList.add('load-external-embed-ctl');
 
-    let allowButton = document.createElement('A');
-    allowButton.textContent = 'Inhalt Abspielen (Extern)';
-    allowButton.setAttribute('href', '#');
-    allowButton.classList.add('load-external-embed-btn');
-
-    allowButton.addEventListener('click', e => {
-      e.preventDefault();
-
-      let realSource = elmt.getAttribute('data-ks-embed-orig-src');
-      if (realSource.includes('?')) {
-        realSource += '&autoplay=1';
-      } else {
-        realSource += '?autoplay=1'
-      }
-      elmt.setAttribute('src', realSource);
-      frame.remove();
-    });
-
-    let allowAllButton = document.createElement('A');
-    allowAllButton.textContent = 'Alle externen Inhalte erlauben';
-    allowAllButton.setAttribute('href', '#');
-    allowAllButton.classList.add('load-external-embed-btn');
-    allowAllButton.addEventListener('click', e => {
+    let enableExternalMediaLink = document.createElement('A');
+    enableExternalMediaLink.setAttribute('href', '#');
+    enableExternalMediaLink.classList.add("external-embed-container");
+    enableExternalMediaLink.addEventListener('click', e => {
 
       e.preventDefault();
       const d = new Date();
@@ -78,18 +70,29 @@ function addEmbedLoadControl(elmt) {
       frame.remove();
     });
 
-    frame.appendChild(allowButton);
-    frame.appendChild(allowAllButton);
+    let embedYTLogo = document.createElement('DIV');
+    embedYTLogo.classList.add('external-embed-yt-lgo');
+    embedYTLogo.innerHTML = '<div class="media_iframe_bg"><svg><use xlink:href="#svg-symbol-yt"></use></svg></div>';
+
+    let embedInfoMessage = document.createElement('DIV');
+    embedInfoMessage.innerHTML = '<svg><use xlink:href="#svg-symbol-toggle-off"></use></svg><div>Externe Inhalte von YouTube erlauben und Video abspielen</div>';
+    embedInfoMessage.classList.add('embed-info-message');
+
+    enableExternalMediaLink.appendChild(embedYTLogo);
+    enableExternalMediaLink.appendChild(embedInfoMessage);
+    frame.appendChild(enableExternalMediaLink);
     fragment.appendChild(frame);
 
     elmt.parentNode.appendChild(fragment);
   }
 }
 
+/**
+ * Load embeded Content if allowed or ask for permision:
+ */
 export function runEmbeds() {
   const embeds = document.querySelectorAll('iframe[data-ks-embed-orig-src]');
   const cookies = document.cookie.split(';');
-  console.log(cookies);
 
   let allowEmbeds = false;
 
@@ -109,5 +112,75 @@ export function runEmbeds() {
         addEmbedLoadControl(iframe);
       }
     });
+  }
+}
+
+/**
+ * Privacy Settings Control:
+ * 
+ */
+const privacySettingsItems = document.querySelectorAll('#page_privacy_settings a.sk_on_off_item');
+
+export function runPrivacyControl() {
+  const cookies = document.cookie.split(';');
+
+  let allowEmbeds = false;
+
+  for (const c of cookies) {
+    let [ cName, cVal ] = c.split('=');
+
+    if (cName.trim() === 'allowembeds' && cVal.trim() === 'Yes') {
+      allowEmbeds = true;
+    }
+  }
+
+  if (privacySettingsItems) {
+    for (const privacyItem of privacySettingsItems) {
+      const itemName = privacyItem.dataset.skPrivacyItem;
+      let enabled = false;
+
+      if (itemName === "embed-media") {
+        enabled = allowEmbeds;
+      }
+
+      if (enabled) {
+        privacyItem.classList.add('enabled');
+      }
+      else {
+        privacyItem.classList.remove('enabled');
+      }
+
+      privacyItem.addEventListener('click', e => {
+        e.preventDefault();
+        if (enabled) {
+          enabled = false;
+          privacyItem.classList.remove('enabled');
+          turPrivacyItemOff(itemName);
+        }
+        else {
+          enabled = true;
+          privacyItem.classList.add('enabled');
+          turPrivacyItemOn(itemName);
+        }
+      });
+    }
+  }
+}
+
+function turPrivacyItemOff(item) {
+  if (item === "embed-media") {
+    const d = new Date();
+    d.setTime(d.getTime());
+    let expires = d.toUTCString();
+    document.cookie = `allowembeds=No; expires=${expires}; path=/`;
+  }
+}
+
+function turPrivacyItemOn(item) {
+  if (item === "embed-media") {
+    const d = new Date();
+    d.setTime(d.getTime() + (365*24*60*60*1000));
+    let expires = d.toUTCString();
+    document.cookie = `allowembeds=Yes; expires=${expires}; path=/`;
   }
 }

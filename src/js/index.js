@@ -1,6 +1,6 @@
-import { justTesting, addScrollEffect, fadeInImages, runEmbeds } from './functions.mjs';
+import { justTesting, addScrollEffect, fadeInImages, runEmbeds, runPrivacyControl } from './functions.mjs';
 
-// Open & Close Mobile Navigation:
+// Open & Close Mobile Navigation when click on Navigation Button:
 const mainNavigationBtn = document.getElementById('main-navigation-btn');
 if (mainNavigationBtn) {
   window.addEventListener('click', function(e) {
@@ -15,6 +15,7 @@ if (mainNavigationBtn) {
   });
 }
 
+// Close Navigation on resize:
 window.addEventListener('resize', () => {
   document.body.classList.remove('navigation-is-open');
 }, true);
@@ -28,8 +29,10 @@ if (mainheader) {
   }, 300);
 }
 
-
-
+/**
+ * Find and load images with data-sk-src attribute:
+ * 
+ */
 const unloadedImages = document.querySelectorAll('[data-sk-src]');
 
 if (unloadedImages) {
@@ -46,6 +49,10 @@ if (unloadedImages) {
   });
 }
 
+/**
+ * Start other code:
+ */
 addScrollEffect();
 fadeInImages();
 runEmbeds();
+runPrivacyControl();

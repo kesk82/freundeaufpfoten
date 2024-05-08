@@ -63,9 +63,6 @@ add_action( 'after_setup_theme', 'register_site_menu' );
 
 // load_theme_textdomain( 'k0b', get_template_directory() . '/languages' );
 
-// setlocale(LC_TIME, "bs_BA.UTF8");
-// setlocale(LC_TIME, "de_DE.UTF8");
-
 add_theme_support( 'post-thumbnails' );
 add_theme_support( 'title-tag' );
 add_theme_support( 'custom-logo' );
@@ -280,3 +277,8 @@ function skke_get_seo_tags() {
  * ACF settings exported as PHP code.
  */
 require_once(__DIR__ . '/inc/acf.php');
+
+/**
+ * Shortcodes:
+ */
+require_once(__DIR__ . '/inc/shortcodes.php');
