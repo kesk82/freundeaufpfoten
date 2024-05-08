@@ -106,6 +106,8 @@ export function runEmbeds() {
 
   if (embeds) {
     embeds.forEach(iframe => {
+      iframe.setAttribute('loading', 'lazy');
+      
       if (allowEmbeds) {
         iframe.setAttribute('src', iframe.getAttribute('data-ks-embed-orig-src'));
       } else {
