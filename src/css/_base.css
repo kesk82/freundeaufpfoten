@@ -1,0 +1,144 @@
+/**
+ * Colors:
+ *  - #E68019 -- hsl(30, 80%, 50%)
+ *  - #197FE6 -- hsl(210, 80%, 50%)
+ */
+
+ :root {
+  box-sizing: border-box;
+
+  --main-color: hsl(30, 80%, 50%);
+  --main-color-light: hsl(30, 80%, 75%);
+  --main-color-dark: hsl(30, 80%, 25%);
+  --opposite-color: hsl(210, 80%, 50%);
+  --opposite-color-light: hsl(210, 80%, 75%);
+  --opposite-color-dark: hsl(210, 80%, 25%);
+
+
+  --color-space-cadet-std: hsla(233, 22%, 23%,1);
+  --color-space-cadet-wlight-oposit: hsla(53.1,22.4%,95%,1);
+
+  --hr-line-color: #eeeeee;
+  --body-background-color: var(--main-color);
+  --body-text-color: #222;
+  --body-link-hover-color: var(--opposite-color-dark);
+  --light-text-color: #ffffff;
+  --border-color: #eeeeee;
+  --footer-bg-color: var(--main-color-dark);
+  --footer-text-color: #fff;
+  --link-bottom-border-color: rgba(33, 41, 49, 0.5);
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 16pt;
+  scroll-behavior: smooth;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+@media screen and (max-width: 1680px) {
+
+  html {
+    font-size: 12pt;
+  }
+
+}
+
+@media screen and (max-width: 1280px) {
+
+  html {
+    font-size: 11pt;
+  }
+
+}
+
+@media screen and (max-width: 360px) {
+
+  html {
+    font-size: 10pt;
+  }
+
+}
+
+body {
+  font-weight: 300;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+code, pre {
+  font-family: monospace;
+}
+
+ol {
+  list-style: decimal;
+  margin: 0 0 2rem 0;
+  padding-left: 1.25rem;
+  /* line-height: 2.375; */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #212931;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+  font-weight: 900;
+  line-height: 1.5;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  border-bottom: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+h2 {
+  font-size: 1.75rem;
+  line-height: 1.3;
+  margin: 0 0 1.5rem 0;
+}
+
+p {
+  text-align: justify;
+  margin: 0 0 2rem 0;
+  /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+}
+
+p, ul, li {
+  line-height: 2;
+}
+
+dl {
+  margin: 0 0 2rem 0;
+}
+
+dl dt {
+  display: block;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+dl dd {
+  margin-left: 2rem;
+}
+
+hr {
+  border: 0;
+  border-bottom: solid 2px;
+  margin: 3rem 0;
+}
+
+hr {
+  border-bottom-color: var(--hr-line-color);
+}

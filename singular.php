@@ -19,12 +19,19 @@ while ( have_posts() ) :
   }
   
   ?>
-  <main <?php post_class( ); ?>>
+    <section class="post">
     <article>
-      <h1><?php the_title(); ?></h1>
+      <header class="major">
+        <span class="date">April 25, 2017</span>
+        <h1><?php the_title(); ?></h1>
+
+        <p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
+        facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
+        amet nullam sed etiam veroeros.</p>
+      </header>
 
       <?php if ($post_pic_id) : ?>
-        <div class="single-thumb"><?php echo $post_pic_html; ?></div>
+        <div class="image main"><?php echo $post_pic_html; ?></div>
       <?php endif; ?>
 
       <div class="the_content"><?php the_content(); ?></div>
@@ -41,10 +48,8 @@ while ( have_posts() ) :
           <?php block_template_part( 'comments' ); ?>
         </section>
       <?php endif; ?>
-
     </article>
-  </main>
-
+    </section>
 <?php endwhile;
 
 get_footer();

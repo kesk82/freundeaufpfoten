@@ -1,33 +1,34 @@
 import { justTesting, addScrollEffect, fadeInImages, runEmbeds, runPrivacyControl } from './functions.mjs';
 
-// Open & Close Mobile Navigation when click on Navigation Button:
-const mainNavigationBtn = document.getElementById('main-navigation-btn');
-if (mainNavigationBtn) {
+const toggleMobileNavigation = document.getElementById('navPanelToggle');
+const navPanel = document.getElementById('navPanel');
+const mainContent = document.getElementById('main');
+
+if (navPanel) {
+  navPanel.style.display = 'block';
+
+  navPanel.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (document.body.classList.contains('navPanel-visible')) {
+      document.body.classList.remove('navPanel-visible');
+    }
+  });
+}
+
+if (toggleMobileNavigation) {
   window.addEventListener('click', function(e) {
-    if (mainNavigationBtn.contains(e.target)) {
+    if (toggleMobileNavigation.contains(e.target)) {
       e.preventDefault();
-      document.body.classList.toggle('navigation-is-open');
+      document.body.classList.toggle('navPanel-visible');
     } else {
-      if (document.body.classList.contains('navigation-is-open')) {
-        document.body.classList.remove('navigation-is-open');
+      if (document.body.classList.contains('navPanel-visible')) {
+        document.body.classList.remove('navPanel-visible');
       }
     }
   });
 }
 
-// Close Navigation on resize:
-window.addEventListener('resize', () => {
-  document.body.classList.remove('navigation-is-open');
-}, true);
 
-// Fade in header:
-const mainheader = document.getElementById('main-header');
-
-if (mainheader) {
-  setTimeout(() => {
-    mainheader.classList.add('loaded');
-  }, 300);
-}
 
 /**
  * Find and load images with data-sk-src attribute:

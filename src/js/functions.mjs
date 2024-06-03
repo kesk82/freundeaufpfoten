@@ -1,17 +1,26 @@
-const mainHeader = document.getElementById('main-header');
+const toggleMobileNavigation = document.getElementById('navPanelToggle');
+const navPanel = document.getElementById('navPanel');
+const mainContent = document.getElementById('main');
+const introContainer = document.getElementById('intro');
 
 /**
  * Change header when scrolling down:
  * 
  */
 function onPageScroll() {
-  if (window.scrollY > 0) {
-    if (! document.body.classList.contains('fixed-header')) {
-      document.body.classList.add('fixed-header');
+  if (toggleMobileNavigation && mainContent) {
+    if (window.scrollY > ( mainContent.offsetTop - toggleMobileNavigation.offsetTop - toggleMobileNavigation.offsetHeight )) {
+      toggleMobileNavigation.classList.add('alt');
+    } else {
+      toggleMobileNavigation.classList.remove('alt');
     }
-  } else {
-    if (document.body.classList.contains('fixed-header')) {
-      document.body.classList.remove('fixed-header');
+  }
+
+  if (introContainer) {
+    if (window.scrollY > 50) {
+      introContainer.classList.add('hidden');
+    } else {
+      introContainer.classList.remove('hidden');
     }
   }
 }
