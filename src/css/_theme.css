@@ -194,6 +194,10 @@ header {
   }
 }
 
+body.admin-bar #intro {
+  min-height: calc(100vh - var(--wp-admin--admin-bar--height));
+}
+
 #header {
   color: var(--light-text-color);
   display: flex;
