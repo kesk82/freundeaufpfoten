@@ -333,7 +333,7 @@ header {
       } */
     }
 
-    li.active {
+    li.active, li.current-menu-item {
       background-color: var(--light-text-color);
       border-top-left-radius: 6px;
       border-top-right-radius: 6px;
@@ -575,6 +575,7 @@ header {
   
   .image.main img {
     width: 100%;
+    height: auto;
   }
   
   a.image {
@@ -595,6 +596,7 @@ header {
   
   .image.fit img {
     width: 100%;
+    height: auto;
     display: block;
   }
   
@@ -602,7 +604,7 @@ header {
     transition: transform 0.2s ease-out;
   }
 
-  .pagination {
+  .pagination > .nav-links {
     display: inline-flex;
     user-select: none;
     cursor: default;
@@ -624,6 +626,10 @@ header {
       } */
     }
 
+    .current {
+      background-color: var(--border-color);
+    }
+
     a, span {
       transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
       border: solid 2px;
@@ -643,10 +649,17 @@ header {
       border-color: var(--border-color);
     }
 
-    .next,
+    .next, .prev,
     .previous {
       text-decoration: none;
       padding: 0 1.75rem;
+    }
+
+    @media screen and (max-width: 980px) {
+      .page, .extra,
+      .page-numbers:not(.next):not(.prev) {
+        display: none;
+      }
     }
   }
 
@@ -703,12 +716,6 @@ header {
 
     & > .posts > article:nth-child(-n + 1) {
       border-top: none;
-    }
-  }
-
-  @media screen and (max-width: 680px) {
-    .pagination .page, .pagination .extra {
-      display: none;
     }
   }
 

@@ -95,6 +95,8 @@ function mytheme_setup_theme() {
   add_image_size( 'my_2x_large', 2048 );
   add_image_size( 'my_2x_xlarge', 2400 );
   add_image_size( 'og_image', 1200, 630, true );
+  add_image_size( 'post_pic', 800, 600, true );
+  add_image_size( 'post_pic_big', 1600, 1200, true );
 }
 
 add_action( 'after_setup_theme', 'mytheme_setup_theme' );
@@ -272,6 +274,33 @@ function skke_get_seo_tags() {
 
   return $r;
 }
+
+// add_action( 'pre_get_posts',  'set_posts_per_page', 999, 1  );
+// function set_posts_per_page( $query ) {
+
+//   global $wp_the_query;
+
+//   $paged = get_query_var( 'paged', 1 );
+
+//   if ( ( ! is_admin() ) && ( $query === $wp_the_query ) ) {
+//     skke_log($paged);
+//     if ($paged < 2) {
+//       $query->set( 'posts_per_page', 11 );
+//     } else {
+//       $query->set( 'posts_per_page', 10 );
+//     }
+//   }
+
+//   // if ( ( ! is_admin() ) && ( $query === $wp_the_query ) && ( $query->is_search() ) ) {
+//   //   $query->set( 'posts_per_page', 3 );
+//   // }
+//   // elseif ( ( ! is_admin() ) && ( $query === $wp_the_query ) && ( $query->is_archive() ) ) {
+//   //   skke_log("Test!");
+//   //   $query->set( 'posts_per_page', 5 );
+//   // }
+
+//   return $query;
+// }
 
 /**
  * ACF settings exported as PHP code.

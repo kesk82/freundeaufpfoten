@@ -10,11 +10,11 @@ while ( have_posts() ) :
   $post_pic_html = '';
   
   if ($post_pic_id) {
-    $post_pic_html = wp_get_attachment_image($post_pic_id, 'thumbnail', false, array(
+    $post_pic_html = wp_get_attachment_image($post_pic_id, 'post_pic_big', false, array(
       'class' => 'single-post-img fade-in-effect',
       'loading' => 'eager',
-      'srcset' => sk_get_srcset($post_pic_id),
-      'sizes' => '(max-width: 60rem) 100vw, 60rem'
+      // 'srcset' => sk_get_srcset($post_pic_id),
+      // 'sizes' => '(max-width: 60rem) 100vw, 60rem'
     ));
   }
   

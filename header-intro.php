@@ -56,8 +56,16 @@ $theme_dir_url = get_template_directory_uri();
     </defs>
   </svg>
   <div id="wrapper">
+    <div id="intro">
+      <h1><?php bloginfo( 'name' ); ?></h1>
+      <p><?php bloginfo( 'description' ); ?></p>
+      <ul class="actions">
+        <li><a href="#header" aria-label="Continue" class="button icon solid solo fa-arrow-down scrolly"><svg><use xlink:href="#icon-arrow-down"></use></svg></a></li>
+      </ul>
+    </div>
+
     <header id="header">
-    <a href="<?php echo get_home_url(); ?>" class="logo"><?php bloginfo( 'name' ); ?></a>
+      <a href="<?php echo get_home_url(); ?>" class="logo"><?php bloginfo( 'name' ); ?></a>
     </header>
 
     <nav id="nav">
