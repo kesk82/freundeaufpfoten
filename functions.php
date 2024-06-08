@@ -311,3 +311,8 @@ require_once(__DIR__ . '/inc/acf.php');
  * Shortcodes:
  */
 require_once(__DIR__ . '/inc/shortcodes.php');
+
+/**
+ * Breadcrumb Navigation:
+ */
+require_once(__DIR__ . '/inc/breadcrumb.php');

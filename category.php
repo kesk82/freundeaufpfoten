@@ -1,14 +1,34 @@
 <?php
 
-$paged = get_query_var( 'paged', 1 );
+$category = get_queried_object();
+$cat_name = sanitize_text_field($category->name);
+$cat_desc = sanitize_text_field($category->description);
+$cat_pic_id = get_field('kategorie_bild', $category->taxonomy . '_' . $category->term_id);
+$cat_pic_html = '';
 
-if ( is_home() && $paged < 2) {
-  get_header('intro');
-  block_template_part( 'homepage-intro' );
+if ($cat_pic_id) {
+  $cat_pic_html = wp_get_attachment_image($cat_pic_id, 'post_pic_big', false, array(
+    'class' => 'index-post-img fade-in-effect',
+    'loading' => 'eager'
+  ));
 }
-else {
-  get_header();
-}
+
+get_header();
+
+?>
+      <article class="post featured">
+        <header class="major">
+          <span class="desc">Kategorie</span>
+          <h1><?php echo $cat_name; ?></h1>
+          <?php if ( $cat_desc ) : ?>
+            <p><?php echo $cat_desc; ?></p>
+          <?php endif; ?>
+        </header>
+        <?php if ( $cat_pic_html ) : ?>
+        <span class="image main"><?php echo $cat_pic_html; ?></span>
+        <?php endif; ?>
+      </article>
+<?php
 
 if ( have_posts() ) :
 
@@ -26,8 +46,6 @@ if ( have_posts() ) :
         // 'srcset' => sk_get_srcset($post_pic_id),
         // 'sizes' => '(max-width: 500px) 100vw, 500px'
       ));
-    } else {
-      $post_pic_html = '<img class="index-post-img fade-in-effect" loading="lazy" src="' . get_template_directory_uri() . '/img/default_post.avif" alt=""></img>';
     }
     ?>
 
@@ -36,10 +54,10 @@ if ( have_posts() ) :
         <span class="date"><time datetime="<?php echo get_the_date( 'Y-m-d H:i:s' ); ?>"><?php echo get_the_date( ); ?></time></span>
         <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
       </header>
-      <?php if ($post_pic_html) : ?>
+      <?php if ($post_pic_id) : ?>
           <a href="<?php the_permalink(); ?>" class="image fit"><?php echo $post_pic_html; ?></a>
       <?php endif; ?>
-      <p class="the_excerpt"><?php echo sanitize_text_field(get_the_excerpt()); ?></p>
+      <p class="the_excerpt"><?php echo get_the_excerpt(); ?></p>
       <ul class="actions special">
         <li><a href="<?php the_permalink(); ?>" class="button">alles lesen</a></li>
       </ul>

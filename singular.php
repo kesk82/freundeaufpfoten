@@ -8,6 +8,12 @@ while ( have_posts() ) :
 
   $post_pic_id = get_post_thumbnail_id();
   $post_pic_html = '';
+
+  $post_intro = sanitize_text_field( get_field('intro', get_the_ID()) );
+
+  if ( ! $post_intro && has_excerpt() ) {
+    $post_intro = sanitize_text_field(get_the_excerpt());
+  }
   
   if ($post_pic_id) {
     $post_pic_html = wp_get_attachment_image($post_pic_id, 'post_pic_big', false, array(
@@ -22,12 +28,12 @@ while ( have_posts() ) :
     <section class="post">
     <article>
       <header class="major">
-        <span class="date">April 25, 2017</span>
+        <span class="date"><time datetime="<?php echo get_the_date( 'Y-m-d H:i:s' ); ?>"><?php echo get_the_date( ); ?></time></span>
         <h1><?php the_title(); ?></h1>
 
-        <p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
-        facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
-        amet nullam sed etiam veroeros.</p>
+        <?php if( $post_intro ) : ?>
+          <p><?php echo $post_intro; ?></p>
+        <?php endif; ?>
       </header>
 
       <?php if ($post_pic_id) : ?>

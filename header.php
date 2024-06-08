@@ -74,4 +74,6 @@ $theme_dir_url = get_template_directory_uri();
       </ul>
     </nav>
 
+    <?php do_action('fap_before_main'); ?>
+
     <main id="main">
