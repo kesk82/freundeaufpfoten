@@ -1,0 +1,8 @@
+img.fade-in-effect {
+  opacity: 0;
+  transition: opacity 800ms;
+}
+
+img.img-loaded.fade-in-effect {
+  opacity: 1;
+}
