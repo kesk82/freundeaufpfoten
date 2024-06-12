@@ -1,6 +1,6 @@
 <?php
 
-add_action('fap_before_main', 'fap_breadcrumb');
+// add_action('fap_before_main', 'fap_breadcrumb');
 
 function fap_breadcrumb() {
   ?>

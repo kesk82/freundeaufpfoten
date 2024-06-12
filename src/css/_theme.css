@@ -15,6 +15,17 @@ a {
   text-decoration: none;
 }
 
+input[type="submit"], .comment-reply-link {
+  display: block;
+  width: 100%;
+  padding: 1em;
+  text-align: center;
+  border: 2px solid var(--body-text-color);
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
 /* a:hover {
   border-bottom-color: transparent;
   color: var(--body-link-hover-color);
@@ -228,6 +239,7 @@ body.admin-bar #intro {
     padding: 1rem 1.75rem;
     text-transform: uppercase;
     visibility: visible;
+    margin: 0 1rem;
   }
 
   /* .logo:hover {
@@ -255,7 +267,7 @@ body.admin-bar #intro {
     visibility: visible;
   }
 
-  /* @media screen and (max-width: 980px) {
+  @media screen and (max-width: 980px) {
     & {
         height: 14rem;
         padding-bottom: 4rem;
@@ -275,7 +287,7 @@ body.admin-bar #intro {
           border-width: 3px !important;
       }
     }
-  } */
+  }
 }
 
 #nav {
@@ -846,7 +858,7 @@ body.admin-bar #intro {
   cursor: default;
   /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
   font-size: 0.8rem;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 0.075em;
   line-height: 1.5;
   text-align: center;

@@ -10,16 +10,9 @@ get_header();
 
 $_queried_object = get_queried_object();
 
-$page_title = '';
 $page_content = '';
 $archive_pic_id = 0;
 $archive_pic_html = '';
-
-if ( isset( $_queried_object->post_title ) ) {
-  $page_title = sanitize_text_field( $_queried_object->post_title );
-} elseif ( isset( $_queried_object->name ) ) {
-  $page_title = sanitize_text_field( $_queried_object->name );
-}
 
 $categories = get_terms(array(
   'taxonomy'   => 'category',
@@ -30,17 +23,14 @@ $categories = get_terms(array(
 ));
 
 ?>
-<main><?php
+  <article class="post featured">
+    <header class="major">
+      <h1>Themen</h1>
+    </header>
+  </article>
+  <section class="posts">
+<?php
 
-if ( $page_title ) {
-  echo '<h1>' . $page_title . '</h1>';
-}
-
-if ( ! empty( $archive_pic_html ) ) {
-  echo '<div class="single-thumb">' . $archive_pic_html . '</div>';
-}
-
-echo '<div class="the_content archive-list">';
   if ( ! empty( $categories ) ) :
     foreach ( $categories as $category ) :
       
@@ -57,18 +47,19 @@ echo '<div class="the_content archive-list">';
       }
       ?>
 
-      <article class="post-index-item<?php echo ($cat_pic_id ? ' post-index-item--with-pic' : ' post-index-item--no-pic' ); ?>">
-        <a href="<?php echo get_term_link( $category ); ?>">
-          <?php if ($cat_pic_id) : ?>
-            <div class="index-thumb"><?php echo $cat_pic_html; ?></div>
+      <article>
+        <header>
+          <h2><a href="<?php echo get_term_link( $category ); ?>"><?php echo $category->name; ?></a></h2>
+        </header>
+        <?php if ($cat_pic_id) : ?>
+            <a href="<?php echo get_term_link( $category ); ?>" class="image fit"><?php echo $cat_pic_html; ?></a>
+        <?php endif; ?>
+        <?php if ( ! empty($category->description)) : ?>
+          <p class="the_excerpt"><?php echo $category->description; ?></p>
           <?php endif; ?>
-
-          <h2><?php echo $category->name; ?></h2>
-
-          <?php if ( ! empty($category->description)) : ?>
-            <p class="the_excerpt"><?php echo $category->description; ?></p>
-          <?php endif; ?>
-        </a>
+        <ul class="actions special">
+          <li><a href="<?php echo get_term_link( $category ); ?>" class="button">alles lesen</a></li>
+        </ul>
       </article>
 
     <?php
@@ -79,9 +70,6 @@ echo '<div class="the_content archive-list">';
     <p><?php esc_html_e( 'Sorry, found no themes here!' ); ?></p>
     <?php
   endif;
-echo '</div>';
-
-?>
-</main><?php
+echo '</section>';
 
 get_footer();
